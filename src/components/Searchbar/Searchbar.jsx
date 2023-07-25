@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-// import 'src/styles.css';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {
+  SearchContainer,
+  SearchForm,
+  FormButton,
+  FormInput,
+} from 'components/Searchbar/Searchbar.styled';
+import { ImSearch } from 'react-icons/im';
 
 class Searchbar extends Component {
   state = {
@@ -21,29 +27,28 @@ class Searchbar extends Component {
     }
 
     this.props.onSubmit(this.state.data);
-    this.setState({ data: '' });
+
     event.currentTarget.reset();
   };
 
   render() {
     return (
-      <header className="searchbar">
-        <form className="form" onSubmit={this.handleSubmit}>
-          <button type="submit" className="button">
-            <span className="button-label">Search</span>
-          </button>
+      <SearchContainer>
+        <SearchForm onSubmit={this.handleSubmit}>
+          <FormButton type="submit">
+            <ImSearch style={{ width: 25, height: 25 }} />
+          </FormButton>
 
-          <input
+          <FormInput
             onChange={this.handleNameChange}
-            value={this.state.data}
             className="input"
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
           />
-        </form>
-      </header>
+        </SearchForm>
+      </SearchContainer>
     );
   }
 }
